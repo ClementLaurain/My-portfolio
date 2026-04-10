@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clément Laurain | Portfolio en cours</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --accent: #38bdf8;
+            --text: #f8fafc;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Utilisation de min-height pour les petits écrans */
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px; /* Empêche le contenu d'être trop large sur PC */
+        }
+
+        .logo {
+            font-size: clamp(3rem, 15vw, 5rem); /* Taille fluide : s'adapte entre 3 et 5rem */
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+        }
+
+        h1 {
+            font-size: clamp(1.2rem, 5vw, 1.8rem); /* Le titre rétrécit sur mobile */
+            font-weight: 300;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(56, 189, 248, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        /* Effet au toucher pour mobile */
+        .badge:active {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            left: 0;
+            font-size: 0.75rem;
+            opacity: 0.5;
+        }
+
+        /* --- MEDIA QUERIES --- */
+        
+        /* Pour les très petits téléphones */
+        @media (max-width: 350px) {
+            .logo { font-size: 2.5rem; }
+            h1 { font-size: 1rem; }
+        }
+
+        /* Pour éviter que le footer cache le texte sur les écrans très courts en hauteur */
+        @media (max-height: 400px) {
+            .footer { position: relative; margin-top: 50px; bottom: 0; }
+            body { display: block; padding-top: 10vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo">CL.</div>
+        <div class="loader"></div>
+        <h1>Portfolio en cours de réalisation</h1>
+        <div class="badge">Développeur Web Junior • Marlenheim</div>
+    </div>
+
+    <div class="footer">
+        © 2026 Clément Laurain • Strasbourg & Environs
+    </div>
+
+</body>
+</html>
