@@ -1,79 +1,136 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio de Clément Laurain, Développeur Web Junior à Marlenheim. Découvrez mes projets et compétences.">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <title>Clément Laurain | Développeur Web Junior</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio de développeur web — création de sites modernes avec HTML, CSS et JavaScript.">
+  <meta name="theme-color" content="#f7f7f4">
+  <title>Portfolio — Développeur web</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-
-    <nav>
-        <a href="#" class="nav-logo">CL.</a>
-        <ul>
-            <li><a href="#projets">Projets</a></li>
-            <li><a href="#skills">Compétences</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="header" id="top">
+    <a class="brand" href="#top" aria-label="Retour en haut">portfolio<span>.</span></a>
+    <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#about">À propos</a>
+      <a href="#projects">Projets</a>
+      <a href="#skills">Compétences</a>
+      <a class="nav-contact" href="#contact">Me contacter <span>↗</span></a>
     </nav>
+  </header>
 
-    <header class="hero">
-        <div class="logo-main">CL.</div>
-        <h1>Clément Laurain</h1>
-        <div class="badge">Développeur Web Junior • Marlenheim</div>
-        <a href="#projets" class="cta-button">Voir mes réalisations</a>
-    </header>
-
-    <main>
-        <section id="projets">
-            <h2><span>Mes Réalisations</span></h2>
-            <div class="grid">
-                <a href="#" class="card" target="_blank">
-                    <div class="card-image-placeholder">Portfolio</div>
-                        <h3>Mon Portfolio</h3>
-                        <p>Design épuré en mode sombre. Utilisation des dernières pratiques CSS (Grid & Flexbox).</p>
-                    <div class="badge-small">Design / Responsive</div>
-                </a>
-            </div>
-        </section>
-
-        <section id="skills">
-            <h2><span>Mes Compétences</span></h2>
-            <div class="skills-container">
-                <div class="badge">HTML5</div>
-                <div class="badge">CSS3</div>
-                <div class="badge">JavaScript</div>
-                <div class="badge">Responsive Design</div>
-                <div class="badge">GitHub</div>
-            </div>
-        </section>
-        <section id="certs">
-            <h2><span>Mes Certifications</span></h2>
-            <div class="card">
-                <h3>Claude 101 - Anthropic</h3>
-                <p>Maîtrise de l'ingénierie de prompt, des capacités des modèles Claude et de l'éthique de l'IA.</p>
-                <a href="certifica-antropic.pdf" target="_blank" class="badge-small">Voir le certificat</a>
-            </div>
-        </section>
-
-        <section id="contact">
-            <h2><span>Me Contacter</span></h2>
-            <div class="contact-container">
-                <p>Un projet ou une question ? N'hésitez pas à me joindre !</p>
-                <div class="contact-links">
-                    <a href="mailto:clement.laurain67@gmail.com" class="badge">Email</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-credit">
-            © 2026 Clément Laurain · Développeur Web Junior
+  <main>
+    <section class="hero section-wrap">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span class="status-dot"></span> PORTFOLIO · DÉVELOPPEMENT WEB</p>
+        <h1>Je donne vie<br>à vos idées <span class="serif">sur le web.</span></h1>
+        <p class="hero-intro">Je conçois des expériences web claires, modernes et agréables à utiliser, avec une attention particulière portée aux détails.</p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#projects">Découvrir mes projets <span>↘</span></a>
+          <a class="text-link" href="#about">En savoir plus <span>↓</span></a>
         </div>
-    </footer>
+      </div>
+      <div class="hero-art reveal" aria-label="Composition graphique abstraite">
+        <div class="art-top"><span>WEB DESIGN</span><span>01 — 03</span></div>
+        <div class="art-grid">
+          <div class="art-circle"></div>
+          <div class="art-square"></div>
+          <div class="art-line"></div>
+          <div class="art-word">DIGITAL<br><i>CRAFT</i></div>
+          <div class="art-caption">DESIGN WITH<br>INTENTION.</div>
+        </div>
+        <div class="art-bottom"><span>HTML / CSS / JS</span><span>FRANCE · 2026</span></div>
+      </div>
+      <div class="hero-footer"><span>SCROLL POUR EXPLORER</span><span class="scroll-line"></span><span>01 / 04</span></div>
+    </section>
 
+    <section class="about section-wrap section-pad" id="about">
+      <div class="section-kicker reveal"><span>01</span><span>À PROPOS</span></div>
+      <div class="about-content reveal">
+        <h2>Curieux du web,<br><span class="muted">créatif dans l’approche.</span></h2>
+        <div class="about-text">
+          <p>Bonjour, moi c’est <strong class="editable-name">Clément</strong>. Je m’intéresse à la création de sites web et à la manière dont le design et le code peuvent transformer une idée en une expérience accessible à tous.</p>
+          <p>J’aime construire des interfaces soignées, structurer le contenu et rendre chaque page simple à parcourir, sur ordinateur comme sur mobile.</p>
+          <a href="#contact" class="text-link">Parlons de votre projet <span>↗</span></a>
+        </div>
+      </div>
+      <div class="about-note"><span>MA FAÇON DE TRAVAILLER</span><p>Observer. Imaginer. Construire. Améliorer.</p></div>
+    </section>
+
+    <section class="projects section-wrap section-pad" id="projects">
+      <div class="section-heading reveal">
+        <div class="section-kicker"><span>02</span><span>SÉLECTION</span></div>
+        <p class="section-aside">Des projets conçus avec soin,<br>du premier écran au dernier détail.</p>
+      </div>
+      <div class="project-feature reveal">
+        <div class="project-visual">
+          <div class="browser-bar"><div class="browser-dots"><i></i><i></i><i></i></div><span>pizzadiscala.fr</span><span>↗</span></div>
+          <div class="pizza-preview-placeholder">
+            <p>L’aperçu charge le site officiel Pizza di Scala, qui peut recevoir des informations techniques comme ton adresse IP.</p>
+            <button class="button button-dark preview-load" type="button">Charger l’aperçu externe <span>↗</span></button>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-meta"><span>PROJET 01</span><span>CRÉATION WEB</span></div>
+          <h3><a class="project-title-link" href="https://pizzadiscala.fr/" target="_blank" rel="noopener noreferrer">Pizza di Scala <span aria-hidden="true">↗</span></a></h3>
+          <p class="project-lead">Création d’un site web pour une pizzeria.</p>
+          <p>Ce projet m’a permis de mettre en pratique les bases du développement front-end : organiser une page, travailler son apparence et construire une interface adaptée à différents écrans.</p>
+          <div class="tag-list"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a class="text-link" href="https://pizzadiscala.fr/" target="_blank" rel="noopener noreferrer">Visiter le site officiel <span>↗</span></a>
+        </div>
+      </div>
+      <p class="project-footnote">Aperçu du site officiel Pizza di Scala. Si l’aperçu ne s’affiche pas, utilise le lien pour ouvrir le site.</p>
+    </section>
+
+    <section class="skills section-wrap section-pad" id="skills">
+      <div class="section-kicker reveal"><span>03</span><span>COMPÉTENCES</span></div>
+      <div class="skills-heading reveal">
+        <h2>Les outils pour<br><span class="muted">construire le web.</span></h2>
+        <p>Les technologies que j’utilise pour créer et donner vie à des interfaces web.</p>
+      </div>
+      <div class="skill-list reveal">
+        <div class="skill-row"><span class="skill-number">01</span><div><h3>HTML</h3><p>Structure des pages et organisation du contenu.</p></div><span class="skill-symbol">⌘</span></div>
+        <div class="skill-row"><span class="skill-number">02</span><div><h3>CSS</h3><p>Mise en page, typographie, responsive design et animations.</p></div><span class="skill-symbol">✳</span></div>
+        <div class="skill-row"><span class="skill-number">03</span><div><h3>JavaScript</h3><p>Interactions et comportements dynamiques.</p></div><span class="skill-symbol">JS</span></div>
+      </div>
+    </section>
+
+    <section class="contact section-wrap" id="contact">
+      <div class="contact-top section-kicker"><span>04</span><span>CONTACT</span></div>
+      <div class="contact-main reveal">
+        <div class="contact-intro">
+          <p class="eyebrow">UN PROJET EN TÊTE ?</p>
+          <h2>Créons quelque<br>chose de <span class="serif">bien.</span></h2>
+          <p class="contact-copy">Tu souhaites échanger, poser une question ou parler d’un projet web ? Écris-moi.</p>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <div class="contact-form-trap" aria-hidden="true">
+            <label for="contact-website">Ne pas remplir</label>
+            <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <label for="contact-name">Ton nom</label>
+          <input id="contact-name" name="name" type="text" autocomplete="name" maxlength="100" required>
+          <label for="contact-email">Ton adresse e-mail</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+          <label for="contact-message">Ton message</label>
+          <textarea id="contact-message" name="message" rows="5" maxlength="5000" required></textarea>
+          <button class="button button-light contact-submit" type="submit">Envoyer le message <span>↗</span></button>
+          <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <footer class="footer">
+        <a class="brand brand-light" href="#top">portfolio<span>.</span></a>
+        <span>FAIT AVEC HTML, CSS & JAVASCRIPT</span>
+        <a href="legal.html">Mentions légales & confidentialité</a>
+        <a href="#top">RETOUR EN HAUT ↑</a>
+        <span>© <span id="year"></span></span>
+      </footer>
+    </section>
+  </main>
 </body>
 </html>
