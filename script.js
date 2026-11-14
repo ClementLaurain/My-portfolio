@@ -65,19 +65,16 @@ if (contactForm) {
 
     try {
       const formData = new FormData(contactForm);
-      const website = formData.get('website');
-      if (typeof website === 'string' && website.trim()) {
+      const honeypot = formData.get('_honey');
+      if (typeof honeypot === 'string' && honeypot.trim()) {
         contactStatus.textContent = 'Le formulaire ne peut pas être envoyé.';
         return;
       }
 
       const payload = Object.fromEntries(formData);
-      delete payload.website;
-      payload.subject = 'Nouveau message depuis le portfolio';
-      payload.from_name = 'Portfolio de Clément';
-      payload.replyto = payload.email;
+      payload._replyto = payload.email;
 
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('https://formsubmit.co/ajax/clement.laurain.dev@proton.me', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +87,7 @@ if (contactForm) {
       try {
         result = JSON.parse(responseText);
       } catch (error) {
-        console.error('Web3Forms a renvoyé une réponse non JSON.', {
+        console.error('FormSubmit a renvoyé une réponse non JSON.', {
           status: response.status,
           contentType: response.headers.get('content-type'),
           url: response.url
@@ -99,8 +96,9 @@ if (contactForm) {
         return;
       }
 
-      if (!response.ok || !result || result.success !== true) {
-        console.error('Web3Forms a refusé le message.', {
+      const succeeded = result && (result.success === true || result.success === 'true');
+      if (!response.ok || !succeeded) {
+        console.error('FormSubmit a refusé le message.', {
           status: response.status,
           message: result && result.message
         });
@@ -110,7 +108,7 @@ if (contactForm) {
         return;
       }
 
-      contactStatus.textContent = result.message;
+      contactStatus.textContent = result.message || 'Merci, ton message a bien été envoyé.';
       contactForm.reset();
     } catch (error) {
       console.error('Erreur lors de l’envoi du formulaire de contact.', error);
