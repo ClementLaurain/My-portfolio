@@ -50,10 +50,24 @@ module.exports = async function handler(req, res) {
         replyto: email
       })
     });
-    const result = await response.json();
+    const responseText = await response.text();
+    let result;
+    try {
+      result = JSON.parse(responseText);
+    } catch (error) {
+      console.error('Web3Forms a renvoyé une réponse non JSON.', {
+        status: response.status,
+        contentType: response.headers.get('content-type'),
+        url: response.url
+      });
+      return res.status(502).json({ error: 'Le service de formulaire est momentanément indisponible. Réessaie plus tard.' });
+    }
 
     if (!response.ok || result.success !== true) {
-      console.error('Web3Forms a refusé le message. Code HTTP :', response.status);
+      console.error('Web3Forms a refusé le message.', {
+        status: response.status,
+        message: result.message
+      });
       return res.status(502).json({ error: 'Le message n’a pas pu être envoyé. Réessaie plus tard.' });
     }
 
