@@ -1,5 +1,3 @@
-const recipient = 'clement.laurain.dev@proton.me';
-
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -30,37 +28,38 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Vérifie les champs du formulaire et réessaie.' });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.CONTACT_FROM_EMAIL;
-  if (!apiKey || !from) {
-    console.error('RESEND_API_KEY et CONTACT_FROM_EMAIL doivent être configurées.');
+  const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+  if (!accessKey) {
+    console.error('WEB3FORMS_ACCESS_KEY doit être configurée.');
     return res.status(503).json({ error: 'Le formulaire n’est pas encore configuré. Réessaie plus tard.' });
   }
 
   try {
-    const response = await fetch('https://api.resend.com/emails', {
+    const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from,
-        to: [recipient],
-        reply_to: email,
+        access_key: accessKey,
+        name,
+        email,
+        message,
         subject: 'Nouveau message depuis le portfolio',
-        text: `Nom : ${name}\nE-mail : ${email}\n\nMessage :\n${message}`
+        from_name: 'Portfolio de Clément',
+        replyto: email
       })
     });
+    const result = await response.json();
 
-    if (!response.ok) {
-      console.error('Resend a refusé le message. Code HTTP :', response.status);
+    if (!response.ok || result.success !== true) {
+      console.error('Web3Forms a refusé le message. Code HTTP :', response.status);
       return res.status(502).json({ error: 'Le message n’a pas pu être envoyé. Réessaie plus tard.' });
     }
 
     return res.status(200).json({ message: 'Merci, ton message a bien été envoyé.' });
   } catch (error) {
-    console.error('Erreur lors de la communication avec Resend.', error);
+    console.error('Erreur lors de la communication avec Web3Forms.', error);
     return res.status(502).json({ error: 'Le message n’a pas pu être envoyé. Réessaie plus tard.' });
   }
 };
