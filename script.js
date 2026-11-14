@@ -64,15 +64,49 @@ if (contactForm) {
     contactStatus.textContent = 'Envoi en cours…';
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))
-      });
-      const result = await response.json();
+      const formData = new FormData(contactForm);
+      const website = formData.get('website');
+      if (typeof website === 'string' && website.trim()) {
+        contactStatus.textContent = 'Le formulaire ne peut pas être envoyé.';
+        return;
+      }
 
-      if (!response.ok) {
-        contactStatus.textContent = result.error || 'Le message n’a pas pu être envoyé. Réessaie plus tard.';
+      const payload = Object.fromEntries(formData);
+      delete payload.website;
+      payload.subject = 'Nouveau message depuis le portfolio';
+      payload.from_name = 'Portfolio de Clément';
+      payload.replyto = payload.email;
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+      const responseText = await response.text();
+      let result;
+      try {
+        result = JSON.parse(responseText);
+      } catch (error) {
+        console.error('Web3Forms a renvoyé une réponse non JSON.', {
+          status: response.status,
+          contentType: response.headers.get('content-type'),
+          url: response.url
+        });
+        contactStatus.textContent = 'Le service de formulaire est momentanément indisponible. Réessaie plus tard.';
+        return;
+      }
+
+      if (!response.ok || !result || result.success !== true) {
+        console.error('Web3Forms a refusé le message.', {
+          status: response.status,
+          message: result && result.message
+        });
+        contactStatus.textContent = result && result.message
+          ? result.message
+          : 'Le message n’a pas pu être envoyé. Réessaie plus tard.';
         return;
       }
 
